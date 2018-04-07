@@ -2,8 +2,10 @@ package com.thoughtworks.collection;
 
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 public class Filter {
 
@@ -14,18 +16,32 @@ public class Filter {
     }
 
     public List<Integer> filterEven() {
-        throw new NotImplementedException();
+        return filterMultiOfNum(2);
     }
 
     public List<Integer> filterMultipleOfThree() {
-        throw new NotImplementedException();
+        return filterMultiOfNum(3);
+    }
+
+    public List<Integer> filterMultiOfNum(int x) {
+        List<Integer> result = new ArrayList<>();
+        for (int i = 0; i < array.size(); i++) {
+            int n = array.get(i);
+            if (n % x == 0) {
+                result.add(n);
+            }
+        }
+        return result;
     }
 
     public List<Integer> getCommonElements(List<Integer> firstList, List<Integer> secondList) {
-        throw new NotImplementedException();
+        List<Integer> result = new ArrayList<>();
+        result.addAll(firstList);
+        result.retainAll(secondList);
+        return result;
     }
 
     public List<Integer> getDifferentElements() {
-        throw new NotImplementedException();
+        return array.stream().distinct().collect(Collectors.toList());
     }
 }
